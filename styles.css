@@ -1,0 +1,477 @@
+/* Estilos do body, criando um fundo com gradiente e centralizando o conteúdo */
+body {
+    background: linear-gradient(to right, #ff9a9e, #fad0c4); /* Gradiente do fundo */
+    height: 100vh; /* Preenche a altura da tela */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    color: #6d6875;
+    margin: 0; /* Remover margens padrão para evitar interferências */
+    overflow: hidden; /* Evitar barras de rolagem desnecessárias */
+}
+
+/* Botões laterais */
+.sidebar {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Estilos para os botões redondos */
+.round-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    position: relative; /* Adicionado para posicionar o ícone corretamente */
+    background: linear-gradient(to right, #ffb6c1, #ff9a9e); /* Gradiente suave */
+    color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito de hover */
+.round-button:hover, .round-button:focus {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para o ícone (opcional) */
+.round-button::before {
+    content: ""; /* Remova o conteúdo padrão */
+    font-family: "Font Awesome 5 Free"; /* Substitua pela sua fonte de ícones */
+    font-weight: 900;
+    margin-right: 0; /* Remova a margem */
+    position: absolute; /* Posicione o ícone */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centralize o ícone */
+}
+
+/* Adicione ícones específicos para cada botão */
+.round-button[data-target="modal1"]::before {
+    content: "\f007"; /* Ícone de usuário (exemplo) */
+}
+
+.round-button[data-target="modal2"]::before {
+    content: "\f001"; /* Ícone de nota musical (exemplo) */
+}
+
+/* Envelope */
+@keyframes message_animation {
+    0% {
+        transform: translateX(-50%) translateY(100%); /* Remove scale(0) */
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(-50%) translateY(-20%) scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(20px) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes message_hide {
+    0% {
+        transform: translateX(-50%) translateY(-10%) scale(1); /* Carta no tamanho normal no início */
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-50%) translateY(-20%) scale(1.1); /* Carta grande e acima no meio */
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(100%) scale(0); /* Carta pequena e abaixo no final */
+        opacity: 0;
+    }
+}
+
+
+
+.caveat-carta {
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 22px; /* Aumenta o tamanho da fonte */
+    line-height: 1.6; /* Ajusta o espaçamento entre as linhas */
+}
+
+.message {
+    position: absolute;
+    width: 90%;
+    max-height: 400px;
+    overflow-y: auto;
+    background: #f8bbd0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 5px 2px #333;
+    transition: transform 0.3s ease;
+    z-index: 600;
+    opacity: 0;
+    padding: 30px; /* Aumenta o espaçamento interno */
+    margin-top: 20px;
+}
+
+.message-content {
+    text-align: center;
+    white-space: pre-line;
+}
+
+.message-content p {
+    margin-bottom: 10px;
+}
+.frame {
+    width: 100%;
+    max-width: 550px;
+    height: 100%;
+    max-height: 350px;
+    margin: 50px auto 0;
+    position: relative;
+    background: #435d77;
+    border: 3px solid #000;
+    border-radius: 0 0 40px 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adiciona transição suave */
+}
+
+.frame:hover {
+    transform: rotate(2deg) scale(1.02); /* Rotaciona e aumenta levemente */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Adiciona sombra */
+}
+
+.frame.open {
+    transform: none; /* Remove a rotação e o scale */
+    box-shadow: none; /* Remove a sombra */
+}
+
+#button_open_envelope {
+    width: 180px;
+    height: 60px;
+    position: absolute;
+    z-index: 311;
+    bottom: 0;
+    left: 50%;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 26px;
+    padding: 15px 0;
+    border: 2px solid #fff;
+    transform: translateX(-50%);
+    transition: 0.3s;
+}
+
+#button_open_envelope:hover {
+    background: #fff;
+    color: #2b67cb;
+    transform: translateX(-50%) scale(1.1);
+    transition: background 0.25s, transform 0.5s, ease-in;
+    cursor: pointer;
+}
+
+.left,
+.right,
+.top {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 310;
+}
+
+.left {
+    background:linear-gradient(to right, #ffb6c1, #ff9a9e, #ff69b4); /* Rosa claro */
+    clip-path: polygon(0 0, 0 90%, 50% 50%);
+    border-right: 1px solid #fff;
+}
+
+.right {
+    background: linear-gradient(to left, #ffb6c1, #ff9a9e, #ff69b4); /* Rosa claro */
+    clip-path: polygon(100% 0, 100% 90%, 50% 50%);
+    border-left: 1px solid #fff;
+}
+
+.top {
+    background: linear-gradient(to bottom, #ff91a4, #ff69b4, #ff1493); /* Rosa médio */
+    clip-path: polygon(0 0, 100% 0, 50% 62.5%);
+    transition: transform 0.6s ease-in-out;
+    transform-origin: top;
+    transform: rotateX(0deg);
+    z-index: 500;
+    border-bottom: 1px solid #fff;
+}
+
+.bottom {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, #ffccd5, #ff9a9e, #ff69b4); /* Rosa bem claro para um efeito suave */
+    border-radius: 0 0 30px 30px;
+    z-index: 310;
+    border-top: 1px solid #000000;
+}
+
+.open {
+    transform: rotateX(180deg);
+}
+
+.pull {
+    animation: message_animation 1.5s ease-in-out forwards;
+}
+
+.hide {
+    animation: message_hide 1.5s ease-in-out forwards;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Garantir que fique acima de outros elementos */
+}
+
+.modal.show {
+    display: block;
+}
+
+/* Estilos para o conteúdo do modal */
+.modal-content {
+    position: relative;
+    background: linear-gradient(to right, #ffb6c1, #ff9a9e);
+    padding: 20px;
+    margin: 50px auto; /* Ajustado para centralizar verticalmente e permitir mais espaço para o vídeo maior */
+    width: 70%;
+    max-width: 800px; /* Aumentado para acomodar o vídeo maior e a descrição */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+    border-radius: 12px; /* Bordas mais arredondadas para um visual mais moderno */
+    overflow: hidden; /* Garante que o conteúdo não ultrapasse os limites */
+}
+
+/* Estilos para o botão de fechar */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #ff6f61; /* Cor ao passar o mouse para um visual mais atraente */
+}
+
+/* Estilos para o contêiner do vídeo no modal */
+/* Estilos para o contêiner do vídeo no modal */
+.video-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.video-container div[id^="video-wrapper"] {
+    width: 30%;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .video-container div[id^="video-wrapper"] {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+
+/* Estilos para a descrição do vídeo */
+.video-description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #4a4a4a;
+    margin-top: 15px;
+    padding: 10px;
+    background: #f8bbd0; /* Fundo leve para destacar o texto */
+    border-radius: 6px; /* Bordas arredondadas para consistência */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar */
+}
+
+/* Estilos para os corações flutuantes */
+.hearts-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    z-index: 400; /* Para ficar acima do envelope */
+}
+
+/* Estilos para os corações */
+.heart {
+    position: absolute;
+    font-size: 24px;
+    opacity: 1;
+    transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+    pointer-events: none;
+    z-index: 400; /* Para ficar acima do envelope */
+}
+
+/* Animação para os corações flutuarem para cima */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* ... outros estilos ... */
+
+/* Estilos para o modal do GIF */
+.modal-gif {
+    display: none;
+    position: fixed;
+    z-index: 1001; /* Aumenta o z-index para ficar acima do envelope */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* ... outros estilos ... */
+/* Estilos para o botão "Surprise" */
+.easter-egg {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    padding: 15px 25px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(to right, #ffb6c1, #ff9a9e); /* Gradiente suave */
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 100; /* Garante que o botão fique acima de outros elementos */
+}
+
+/* Efeito de hover */
+.easter-egg:hover {
+    transform: translateY(-55%) scale(1.05); /* Leve movimento e aumento de tamanho */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra mais intensa no hover */
+}
+
+/* Estilos para o ícone (opcional) */
+.easter-egg::before {
+    font-family: "Font Awesome 5 Free"; /* Substitua pela sua fonte de ícones */
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.easter-egg i.fas.fa-gift {
+    color: #fff; /* Define a cor do ícone como branco */
+}
+
+.modal-gif-content {
+    background-color: #fefefe;
+    margin: 150% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    position: flex;
+    text-align: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+.close-modal-gif {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.loading-gif-container {
+    display: inline-block; /* Permite centralizar com text-align */
+}
+
+/* Ajuste o tamanho do GIF se necessário */
+.loading-gif-container img {
+    max-width: 100%; /* Ajuste o tamanho máximo dos GIFs */
+    height: auto;
+    margin-bottom: 10px; /* Adicione espaço entre os GIFs */
+}
+
+.fotos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.foto-modal {
+    max-width: 300px; /* Ajusta a largura máxima das fotos */
+    height: auto;
+    margin: 15px; /* Aumenta o espaçamento entre as fotos */
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.foto-modal:hover {
+    transform: scale(1.1);
+}
+
+.descricao-foto {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: linear-gradient(to right, #ffb6c1, #ff9a9e); /* Adiciona o degradê rosa */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.descricao-foto:hover {
+    background: linear-gradient(to right, #ff9a9e, #ffb6c1); /* Inverte o degradê no hover */
+}
+
+#modal1 h2 {
+    color: #fff; /* Altera a cor do texto para cinza escuro */
+}
+
+#modal2 h2 {
+    color: #fff; /* Altera a cor do texto para cinza escuro */
+}

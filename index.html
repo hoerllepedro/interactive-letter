@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Interativa</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <button class="round-button" data-target="modal1" aria-label="Abrir mensagem de encorajamento">
+            <i class="fas fa-heart"></i>
+        </button>
+        <button class="round-button" data-target="modal2" aria-label="Abrir música de conforto">
+            <i class="fas fa-music"></i>
+        </button>
+    </div>
+
+    <div class="frame" id="envelope">
+        <div class="message caveat-carta">
+            <div class="message-content">
+                <h1>Text here</h1>
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate..<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br><br>
+        
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br><br>
+        
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate..<br><br>
+        
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.,<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br><br>
+        
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.<br>
+                    Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.</p>
+                <h2>Proin gravida nunc nec magna sollicitudin, non mollis nibh vulputate.</h2>
+            </div>
+        </div>
+        <div class="bottom"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="top"></div>
+        <div class="hearts-container"></div>
+    </div>
+
+    <div class="modal" id="modal1">
+        <div class="modal-content">
+            <h2>Text here</h2>
+            <div class="fotos-container">
+                <div class="foto-row">
+                    <img src="images.jpeg.png" alt="Foto 1" class="foto-modal" data-descricao="text here">
+                    <img src="images.jpeg.png" alt="Foto 2" class="foto-modal" data-descricao="text here">
+                </div>
+                <div class="foto-row">
+                    <img src="images.jpeg.png" alt="Foto 3" class="foto-modal" data-descricao="text here">
+                    <img src="images.jpeg.png" alt="Foto 4" class="foto-modal" data-descricao="text here.">
+                </div>
+            </div>
+            <div class="descricao-foto"></div> <button class="close-modal">×</button>
+        </div>
+    </div>
+
+    <div id="modal-gif" class="modal-gif">
+        <div class="modal-content">
+            <button class="close-modal" id="fechar-gif">×</button>
+            <div id="loading-gif-container">
+                <img src="nadja-laszlo-wwdits.gif" alt="GIF de carregamento">
+                <img src="nadja-laszlo-nadja-laszlo-love.gif" alt="GIF de carregamento 2">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal2">
+        <div class="modal-content">
+            <h2>Text here</h2>
+            <div class="video-container">
+                <div id="video-wrapper1">
+                    <div id="youtube-player1"></div>
+                    <p class="video-description">Text here.</p>
+                </div>
+                <div id="video-wrapper2">
+                    <div id="youtube-player2"></div>
+                    <p class="video-description">Text here</p>
+                </div>
+                <div id="video-wrapper3">
+                    <div id="youtube-player3"></div>
+                    <p class="video-description">Text here</p>
+                </div>
+            </div>
+            <p class="video-description">Text here</p>
+            <button class="close-modal" id="fechar-gif">X</button>
+        </div>
+    </div>
+
+    <button id="abrir-gif" class="easter-egg">
+        <i class="fas fa-gift"></i>
+    </button>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+</html>
